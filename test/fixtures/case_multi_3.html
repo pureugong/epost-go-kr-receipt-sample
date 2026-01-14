@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset='utf-8' />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi" />
+
+<title>인터넷우체국 우편 신청내역조회 | 인터넷우체국</title>
+<link rel="stylesheet" type="text/css" href="https://m.epost.go.kr/css/html5Reset.css" />
+<link rel="stylesheet" type="text/css" href="https://m.epost.go.kr/css/media_style.css">
+<link href="https://m.epost.go.kr/images/comm/epost_round.png" rel="apple-touch-icon-precomposed">
+<script type="text/javascript" language="javascript" src="https://m.epost.go.kr/jscripts/comm/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://m.epost.go.kr/jscripts/comm/n_common.js" ></script>
+<script type="text/javascript" language="javascript" src="https://m.epost.go.kr/js/title_common.js" ></script>
+
+<!-- html5 미지원 브라우저를 위한 설정 -->
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/jscripts/comm/html5.js" ></script>
+<![endif]-->
+<!-- //html5 미지원 브라우저를 위한 설정 -->
+
+
+<style type="text/css">
+		.bt_bd{padding-bottom:1rem;margin-bottom:1rem;border-bottom:1px dashed #666 !important;}
+	.mem_info{padding-bottom:1rem;}
+	.mem_info dt{display:inline-block;}
+	.mem_info dt label{font-weight:bold;}
+	.mem_info dd{display:inline-block;padding-left:3rem;}
+	.mem_info dd input{width:90%;}
+    .info{margin-top: 1rem;padding: .5rem 1.5rem;background-color: #fff;font-size: 1.3rem;line-height: 1.7rem;}
+    
+    .receiWrap{position:relative;}
+    .receiWrap > .btn_wrap{position:absolute;top:0;right:0;}
+    .receiWrap > .btn_wrap .btnCss{padding:1rem !important;}
+    .m_box .btnWrap button{padding:1rem 2rem !important;}
+    
+    html,body{height:100%;}
+	#selectWrap{margin:0 auto;width:80%;overflow-x:auto;max-height:100%;top:50%;margin-top:-25rem;;left:10%;position:fixed;z-index:99999;background:#fff;}
+	.selectOptionWrap .selectOption li{border-bottom:.1rem solid #ddd;border-left:0;border-right:0;font-size:1.5rem;font-weight:bold;color:#000;}
+	.selectOptionWrap .selectOption li > label{display:block;padding:1.2rem 2rem;line-height:normal;}
+	.selectOptionWrap .selectOption li input[type=radio]{float:right;}
+        
+
+	#delBtn .m_box .box strong{display:block;width:100%;}
+	#bgWrap{position:absolute;top:0;left:0;width:100%;height:1000%;background:#000;opacity:0.7;z-index:9999;}
+	#urlAddr{position:absolute;top:-9999px}
+	
+	.bt_bd{padding-bottom:1rem;margin-bottom:1rem;border-bottom:1px dashed #000;}
+	.mem_info{padding-bottom:1rem;}
+	.mem_info dt{display:inline-block;}
+	.mem_info dt label{font-weight:bold;}
+	.mem_info dd{display:inline-block;padding-left:3rem;}
+	.mem_info dd input{width:90%;}
+	
+	.receipt_bg {background: #4b4b4b; padding: 2rem 1rem 1rem;}
+	
+	.sub_content {margin-bottom: 0;}
+	
+    .info{margin-top: 1rem;padding-bottom: 90px; background: url(https://m.epost.go.kr/images/common/mobile/bottom_homebg.png) no-repeat center 95%; background-size: 104px; line-height: 1.7rem; font-size: 1.3rem;}
+	.info li {margin-bottom: 0px; font-size: 12px;}
+	.info li.info_space {position: relative; padding-left: 15px;}
+	.info li.info_space:before {position: absolute; left: 0; content: '※';}
+	.info li:first-of-type {margin-bottom: 3rem; text-align: center;}
+	.info li > h3 {color: #000;}
+	.info li > em {display: inline-block; width: 130px; border-bottom: 1px solid #c9c9c9;}
+    
+	.receipt_close {position: fixed; top: 30px; right: 25px; display: inline-block; width: 20px; height: 20px; z-index: 10;}
+	.receipt_close > button {display: inline-block; width: 100%; height: 100%; background: url(https://m.epost.go.kr/images/common/mobile/barcode_pop_close.png) no-repeat center; background-size: 20px; font-size: 0;}
+	
+	.receipt_header {position: relative; margin: 0 1rem; border-bottom: 3px solid #7b7b7b; text-align: center;}
+	.receipt_header > h2 {height: 150px; background: url(https://m.epost.go.kr/images/common/mobile/top_homebg.png) no-repeat center 65%; font-size: 0;}
+	.receipt_header > h2 > button {position: absolute; top: 79px; left: 50%; transform: translateX(-50%); display: inline-block; width: 131px; height: 28px; font-size: 0;}
+	.receipt_header > p {margin-bottom: 20px;}
+	.receipt_header > p > span {margin: 0 3px; font-size: 16px; font-weight: bold; color: #000;}
+	.receipt_header > p > span:first-of-type {display: inline-block; width: 60px; border-top: 1px solid #c9c9c9; vertical-align: middle;}
+	.receipt_header > p > span:last-of-type {display: inline-block; width: 60px; border-top: 1px solid #c9c9c9; vertical-align: middle;}
+	.receipt_header .receipt_thrbtn {display: inline-block; margin-bottom: 15px;}
+	.receipt_header .receipt_thrbtn li {float: left; margin-right: 15px; padding-right: 15px; border-right: 1px solid #6b6b6b; line-height: 12px; font-size: 12px;}
+	.receipt_header .receipt_thrbtn li:last-of-type {margin-right: 0; padding-right: 0; border-right: 0;}
+	.receipt_header .receipt_thrbtn li > button {color: #000;}
+	
+	.receiWrap {position:relative; margin-top:2rem;background-color:#fff;font-size:1.3rem;line-height:1.7rem;}
+    .receiWrap > .btn_wrap{position:absolute;top:0;right:0;}
+    .receiWrap > .btn_wrap .btnCss{padding:1rem !important;}
+    .m_box .btnWrap button{padding:1rem 2rem !important;}
+    .receiWrap .no_recei {text-align: center; padding: 15rem 0; font-size: 1.3rem;}
+    
+    html,body{height:100%;}
+	#selectWrap{margin:0 auto;width:80%;overflow-x:auto;max-height:100%;top:50%;margin-top:-25rem;;left:10%;position:fixed;z-index:99999;background:#fff;}
+	.selectOptionWrap .selectOption li{border-bottom:.1rem solid #ddd;border-left:0;border-right:0;font-size:1.5rem;font-weight:bold;color:#000;}
+	.selectOptionWrap .selectOption li > label{display:block;padding:1.2rem 2rem;line-height:normal;}
+	.selectOptionWrap .selectOption li input[type=radio]{float:right;}
+        
+	#delBtn .m_box .box strong{display:block;width:100%;}
+	#bgWrap{position:absolute;top:0;left:0;width:100%;height:1000%;background:#000;opacity:0.7;z-index:9999;}
+	#urlAddr{position:absolute;top:-9999px}
+	
+	footer {margin-top: 0;}
+	footer .copy {padding-top: 0;}
+	footer .copy .crt {margin-top: 0;}
+</style>
+
+<script>
+$(document).ready(function(){
+	
+});
+function memberInfo(){
+	var memMobile = "";
+	$.ajax({
+		url:"https://m.epost.go.kr/mobile.retrieveMeminfoAjax.comm",
+		type:"POST",
+		dataType:"xml",
+		async:false,
+		success:function(data){
+			memMobile = $(data).find("mobile").text();
+		},
+		error:function(e){
+			console.log("error : meminfo");
+		},
+		complete:function(){
+			console.log("complete : meminfo");
+		}
+	});
+	return memMobile;
+}
+function SetCookie( name, value, expiredays ){
+    var todayDate = new Date();
+    todayDate.setDate( todayDate.getDate() + expiredays );
+    document.cookie = name + "=" + escape( value ) + "; path=/; domain=epost.go.kr; expires=" + todayDate.toGMTString() + ";";
+}
+	function ReceiptLogin(){
+		var f = document.getElementById("loginfrmReceipt");
+		
+    f.s_url.value  = "https://m.epost.go.kr/parcel/mobile.RetrieveMobileRecepitSave.parcel?";
+		
+		f.action = "https://m.epost.go.kr/mobile/login/cafzc008k01.jsp";
+		f.submit();
+	} 
+	
+	function ReceiptSave(){ 
+		
+			//alert("인터넷 우체국 회원일 경우 영수증 보관이 가능합니다");
+			ReceiptLogin();
+		
+	}
+
+	function oFlag(){
+		
+	}
+	
+	function customerInfoShow(){
+		$('#layer_wrap').show();
+		$("#layer_popUp").show();
+	}
+	
+	function customerInfoHide(){
+		$('#layer_wrap').hide();
+		$("#layer_popUp").hide();
+	}
+</script>
+</head>
+<body onload="oFlag();">
+<div class="wrapper no_sh">
+  <div class="receipt_bg">
+	<div class="bgff">
+	<span class="receipt_close" style="display:none"><button onclick="history.back();">닫기</button></span>
+	<!-- Header Start -->
+	<div class="receipt_header">
+		<h2><button type="button">우체국</button></h2>
+		<p>
+			<span></span>
+			<span>모바일 영수증</span>
+			<span></span>
+		</p>
+		<ul class="receipt_thrbtn">
+		</ul>
+	</div>
+	<!-- Header End -->
+	
+	<article class="sub_content" id="con">
+		<form class="manless_search_form" name="smainForm" id="smainForm" method="post" action="">
+			<div class="receiWrap">
+				<div class="message_ipt mgt00" style="">
+					<div style="white-space: pre-wrap;">부산해운대우체국
+666-55-44444 ☏051-999-0000
+고객문의 전화 : 1588-1300
+우체국 영업 시간 : 평일(09-18시), 토요일 휴무
+영수증NO :55443322
+접수일자 :2026-03-05  09:15, 창구:301 </div>
+				</div>
+				<div class="message_ipt mgt00" style="">
+					
+					<div style="white-space: pre-wrap;"><p class='bt_bd'></p><국내등기(소포)우편물>
+발 송 인 : 67890  박*성
+부산광역시 해운대구 해운대해변로 200 (우동) <p class='bt_bd'></p>등기번호                            요금           우편번호        수취인<p class='bt_bd'></p><a href=http://epost.go.kr/e/?t1=3333333333331>3333333333331</a>           6,000           44444          강*구
+소포 7000g/110cm 식품/과일
+<a href=http://epost.go.kr/e/?t1=3333333333332>3333333333332</a>           4,000           55555          윤*미
+소포 2500g/70cm 의류/신발
+
+
+합계                   2통          10,000원<p class='bt_bd'></p>    총요금 :              (즉납) 10,000원
+할인요금 :                             0원
+수납요금 :                          10,000원
+신용카드 :                          10,000원<p class='bt_bd'></p>카드번호 :5678-1234-****-567*
+카드사명 :우리카드, 매입사명 : 우리카드
+할부개월 :일시불, 승인금액 :10,000
+승인번호 :99887766, 가맹점번호 :1357924680
+기프트카드잔액 :<p class='bt_bd'></p>* 수도권·경남권·충청권 우체국(134국)에서
+  ‘소포 물품 사진서비스’ 시범운영을 합니다.
+  발송인 요청에 따라 물품 사진 촬영 및 소포
+  접수 후 수취인에게 URL 등으로 전송합니다.
+  (진품·고장품 여부, 내용품 구성 등 무보증) 
+* 손해배상 등의 청구시 영수증이 필요합니다.
+* 배달조회 등 사항은 우체국 홈페이지 등에서 조회 가능합니다.
+* 마감후 접수 우편물은 다음 영업일에 접수국에서 출발합니다.
+        <p class='bt_bd'></p>
+				</div>
+			</div>
+		        <div class="mlayer">
+		            <div class="bg"></div>
+		            <!-- 영수증 삭제 -->
+		            <div id="delBtn" class="pop_layer" style="display:none;margin-top: 100px; top: 0px; margin-left: -150px;">
+		                <div class="m_box">
+		                    <h3>보관함 삭제</h3>
+		                    <div class="box t_cnt">
+		                        <p class="pdb10">
+		                            영수증을 삭제 하시겠습니까?<strong class="cred">(복구불가)</strong>
+		                        </p>
+		                        <p class="btnWrap t_cnt">
+		                            <button id="canBtn" type="button" class="btn01 dpib btnCss">취소</button>
+		                            <button id="okBtn" type="button" class="btn06 dpib btnCss ">확인</button>
+		                        </p>
+		                    </div>
+		                </div>
+		                <div><button type="button" class="cbtn">close</button></div>
+		            </div>
+		            <!-- //영수증 삭제 -->
+		            
+		            <!-- 영수증 이동 -->
+		            <div id="moveBtn" class="pop_layer" style="display:none;margin-top: 100px; top: 0px; margin-left: -150px;">
+		                <div class="m_box">
+		                    <h3>영수증 이동</h3>
+		                    <div class="box t_cnt">
+		                        <p class="pdb10">
+		                            보관함 '<span class="moveNm"></span>'로 이동했습니다.
+		                        </p>
+		                        <p class="btnWrap t_cnt">
+		                            <button id="okBtn1111" type="button" class="btn06 dpib btnCss ">확인</button>
+		                        </p>
+		                    </div>
+		                </div>
+		                <div><button type="button" class="cbtn">close</button></div>
+		            </div>
+		            <!-- //영수증 이동 -->
+		        </div>
+</div>
+	</form>
+		<ul class="info">
+			<li><h3 class="f15 t_cnt mgb15">우체국을 이용해 주셔서 감사합니다.</h3><em></em></li>
+			<li><h3 class="f15 mgb15">안내사항</h3></li>
+			<li class="info_space">모바일영수증을 장기보관함으로 이동하시면 최대 5년까지 보관이 가능합니다.(기본 1년 보관)</li>
+			<li class="info_space">본 영수증은 거래의 참고용으로 사용하시기 바랍니다.</li>
+			<li class="info_space mgb30">인터넷우체국 (www.epost.go.kr) 에서 모바일 영수증 출력이 가능합니다.</li>
+			<li><h3 class="f15 mgb15">국내우편물 안내사항</h3></li>
+			<li class="info_space">국내등기우편물의 최대 손해배상금액은 소포 50만원, 통상 10만원 입니다. (우편법 시행규칙 제 135조의 2)</li>
+			<li class="info_space">등기우편물 배달조회는 인터넷우체국(www.epost.go.kr) 통해 가능하며, 조회기간은 등기우편물 1년, 내용증명 3년입니다.</li>
+			<li class="info_space mgb30">우편물 송달기준 적용곤란지역은 예정된 배달일보다 더 소요될 수 있으며, 고가물품은 안심소포서비스 이용하시기 바랍니다.</li>
+			<li><h3 class="f15 mgb15">국제우편물 안내사항</h3></li>
+			<li class="info_space">행방조회 청구는 접수익일부터 소포ㆍ등기-6개월, 국제 특급-4개월, 초특급-1개월로 기한이 경과하면 청구할 수 없습니다.</li>
+			<li class="info_space">통관 시 세금이 부과될 수 있으며, 우체국은 통관업무를 대행 하지 않습니다.</li>
+			<li class="info_space">자세한 항공탑재금지품 목록은 <span style="color:#00ff" class="airlist" onclick="createiFrameAutomatic('https://m.epost.go.kr/parcel/mobile.Introduction04.postal?popup=Y')">'목록보기'</span> 를 통해 확인하실 수 있습니다.</li>
+			<li class="info_space">우편금지 및 제한 물품이 발견되면 반송 비용이 부과될 수 있습니다.</li>
+			<li class="info_space">통관지연 또는 배달지연 안내 국가에 대해서는 배달지연으로 인한 손해배상이 적용되지 않습니다.</li>
+			<li class="info_space">자세한 사항은 국제소포ㆍ특급 기표지(영수증)뒷면의 기표지 작성요령을 참고 바랍니다.</li>
+		</ul>
+		<div>
+            <div id="selectWrap" style="display:none;">
+                <div class="selectOptionWrap">
+                     <ul class="selectOption" name="mobileKeepSelect_Move" id="mobileKeepSelect_eng_move">
+	
+                    </ul>
+                </div>
+            </div>
+            <div id="bgWrap" style="display:none;"></div>
+        </div>
+	</article>
+		
+			<fieldset style="padding:0.5rem;text-align:center;">
+			<legend>영수증 보관</legend>
+				<button class="btn13" style="margin-top:1rem;padding:1rem 2rem;background-color:#cc2715;background-image:none;" onclick="return ReceiptSave();"><span>영수증 보관</span></button>
+			</fieldset>
+		
+
+	<form name="loginfrmReceipt"  id="loginfrmReceipt" method="post" action="">
+		<input type="hidden" name="s_url" value=""/>
+		<input type="hidden" name="s_url2" value=""/>
+		<input type="hidden" name="login" value="epost2"/>
+    <input type="hidden" name="serialno" value="202603050000339807946"/>
+    <input type="hidden" name="recevno" value="202603051105813104088"/>
+
+
+
+	</form>
+	<!-- footer -->
+</div>
+</div>
+<script type="text/javascript" src="https://m.epost.go.kr/js/head_common.js"></script>
+</body>
+</html>

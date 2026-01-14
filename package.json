@@ -1,0 +1,16 @@
+{
+  "name": "epost-go-kr-receipt-sample",
+  "version": "1.0.0",
+  "description": "This repository contains sample HTML files for Korean Post (epost.go.kr) mobile receipts. These files are used for testing parsers.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "report": "node validate_and_report.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
