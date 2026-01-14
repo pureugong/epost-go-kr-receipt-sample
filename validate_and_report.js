@@ -16,7 +16,7 @@ function updateReadme() {
 
     const files = fs.readdirSync(fixturesDir).filter(f => f.startsWith('case_') && f.endsWith('.html')).sort();
     
-    let table = '| File | Status | Items Found | Last Checked |\n|---|---|---|---|\n';
+    let table = '| 파일 | 상태 | 항목 수 | S3 링크 | 최근 확인일 |\n|---|---|---|---|---|\n';
     const now = new Date().toISOString().split('T')[0];
     let hasFailure = false;
 
@@ -45,7 +45,8 @@ function updateReadme() {
 
         // Link needs to point to the fixture location relative to README
         const relativeLink = `test/fixtures/${file}`;
-        table += `| [${file}](${relativeLink}) | ${icon} ${status} | ${details} | ${now} |\n`;
+        const s3Link = `[Link](https://magicmealkits.s3.ap-northeast-1.amazonaws.com/epost-go-kr-receipt-sample/${file})`;
+        table += `| [${file}](${relativeLink}) | ${icon} ${status} | ${details} | ${s3Link} | ${now} |\n`;
     });
 
     const startMarker = '<!-- TEST_RESULTS_START -->';

@@ -58,11 +58,11 @@
 
 <!-- TEST_RESULTS_START -->
 
-| 파일 | 상태 | 발견된 항목 수 | 최근 확인일 |
-|---|---|---|---|
-| [case_multi_1.html](test/fixtures/case_multi_1.html) | ✅ PASS | 2 | 2026-01-14 |
-| [case_multi_2.html](test/fixtures/case_multi_2.html) | ✅ PASS | 3 | 2026-01-14 |
-| [case_multi_3.html](test/fixtures/case_multi_3.html) | ✅ PASS | 2 | 2026-01-14 |
+| 파일 | 상태 | 항목 수 | S3 링크 | 최근 확인일 |
+|---|---|---|---|---|
+| [case_multi_1.html](test/fixtures/case_multi_1.html) | ✅ PASS | 2 | [Link](https://magicmealkits.s3.ap-northeast-1.amazonaws.com/epost-go-kr-receipt-sample/case_multi_1.html) | 2026-01-14 |
+| [case_multi_2.html](test/fixtures/case_multi_2.html) | ✅ PASS | 3 | [Link](https://magicmealkits.s3.ap-northeast-1.amazonaws.com/epost-go-kr-receipt-sample/case_multi_2.html) | 2026-01-14 |
+| [case_multi_3.html](test/fixtures/case_multi_3.html) | ✅ PASS | 2 | [Link](https://magicmealkits.s3.ap-northeast-1.amazonaws.com/epost-go-kr-receipt-sample/case_multi_3.html) | 2026-01-14 |
 
 <!-- TEST_RESULTS_END -->
 
